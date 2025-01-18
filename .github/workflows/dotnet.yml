@@ -35,7 +35,24 @@ jobs:
     
     - name: Test
       run: dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
-      
+    
+    - name: Process Test Results
+      if: always()
+      run: |
+        TEST_COUNT=$(dotnet test --no-build --verbosity minimal | grep "Passed!" | grep -o '[0-9]\+ test' | grep -o '[0-9]\+')
+        echo "{\"schemaVersion\":1,\"label\":\"tests\",\"message\":\"$TEST_COUNT passed\",\"color\":\"success\"}" > test-badge.json
+    
+    - name: Update Gist with Test Results
+      if: always()
+      uses: schneegans/dynamic-badges-action@v1.6.0
+      with:
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: 47477479896ebb9ad4156c5f274fb438
+        filename: tests.json
+        label: tests
+        message: ${{ env.TEST_COUNT }} passed
+        color: success
+
     - name: Test Report
       uses: dorny/test-reporter@v1
       if: always()
