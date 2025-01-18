@@ -34,7 +34,7 @@ jobs:
         playwright install
 
     - name: Install xmllint
-      run: sudo apt-get install -y xmlstarlet
+      run: sudo apt-get install -y libxml2-utils
 
     - name: Test and Extract Count
       id: test
