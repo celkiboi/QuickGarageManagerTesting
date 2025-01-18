@@ -48,9 +48,9 @@ jobs:
 
         echo "TEST_RESULT=$TEST_RESULT"
         echo "TEST_RESULT=$TEST_RESULT" >> $GITHUB_ENV
-        
+
     - name: check
-      run: ${{ secrets.GIST_SECRET }}
+      run: echo ${{ secrets.GIST_SECRET }}
     
     - name: Update Gist with Test Results
       if: always()
