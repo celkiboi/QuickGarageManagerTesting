@@ -1,0 +1,45 @@
+# Build Folders
+bin/
+obj/
+
+# User-Specific Files
+*.rsuser
+*.user
+*.suo
+*.userosscache
+*.userprefs
+
+# Logs
+*.log
+*.tlog
+
+# NuGet Packages
+packages/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+
+# Visual Studio Working Files
+.vs/
+.vscode/
+.vscode-test/
+
+# Playwright Files
+.playwright/
+playwright.config.ts
+playwright-report/
+test-results/
+
+# Backup & Temporary Files
+*.tmp
+*.bak
+*.swp
+*.ide
+
+# Auto-Generated Files
+GeneratedCode/
+Service References/
+
+# Dotnet Tools
+.dotnet_tool/
+.dotnet/tools/
