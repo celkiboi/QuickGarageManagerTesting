@@ -49,6 +49,10 @@ jobs:
         echo "TEST_RESULT=$TEST_RESULT"
         echo "TEST_RESULT=$TEST_RESULT" >> $GITHUB_ENV
     
+    - name: Debug Gist API Response
+      run: |
+        curl -X GET -H "Authorization: token ${{ secrets.GIST_SECRET }}" "https://api.github.com/gists/47477479896ebb9ad4156c5f274fb438" || echo "Failed to fetch Gist"
+    
     - name: Update Gist with Test Results
       if: always()
       uses: schneegans/dynamic-badges-action@v1.6.0
