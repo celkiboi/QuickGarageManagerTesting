@@ -51,7 +51,10 @@ jobs:
     
     - name: Debug Gist API Response
       run: |
-        curl -X GET -H "Authorization: token ${{ secrets.GIST_SECRET }}" "https://api.github.com/gists/47477479896ebb9ad4156c5f274fb438" || echo "Failed to fetch Gist"
+        curl -X PATCH -H "Authorization: token YOUR_GITHUB_TOKEN" \
+        -d '{"files": {"tests.json": {"content": "{\"schemaVersion\":1, \"label\":\"tests\", \"message\":\"5 passed\", \"color\":\"success\"}"}}}' \
+        https://api.github.com/gists/47477479896ebb9ad4156c5f274fb438
+
     
     - name: Update Gist with Test Results
       if: always()
