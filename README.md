@@ -20,8 +20,8 @@ Follow these steps to set up the project:
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-username/your-repository.git
-   cd your-repository
+   git clone https://github.com/celkiboi/QuickGarageManagerTesting
+   cd QuickGarageManagerTesting
    ```
 
 2. **Install NuGet Packages**
@@ -41,15 +41,13 @@ Follow these steps to set up the project:
    In the **Package Manager Console** or terminal, execute:
    ```bash
    dotnet tool install --global Microsoft.Playwright.CLI
+   dotnet build
    dotnet playwright install
    ```
 
    This command downloads the required browsers (Chromium, Firefox, WebKit).
 
-4. **Configure the .gitignore File**
-   Ensure the `.gitignore` file excludes unnecessary files like `bin/`, `obj/`, and `.playwright/`. The file is included in the repository for your convenience.
-
-5. **Run the Tests**
+4. **Run the Tests**
    Open **Test Explorer** in Visual Studio:
    - Go to `Test > Test Explorer`.
    - Build the project (`Ctrl + Shift + B`) to discover the tests.
