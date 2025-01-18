@@ -30,13 +30,9 @@ jobs:
         dotnet add package Microsoft.Playwright --version 1.49.0
         dotnet restore  # Ensure all dependencies are restored
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build
     - name: Install Playwright browsers
       run: dotnet playwright install
     
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
