@@ -42,11 +42,15 @@ jobs:
         OUTPUT=$(dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx")
         echo "$OUTPUT"
 
-        # Extract test results using `dotnet test`'s output 
-        TEST_COUNT=$(echo "$OUTPUT" | grep -oP 'Total tests: \K\d+') 
+        # Extract total tests and passed tests
+        TOTAL_TESTS=$(echo "$OUTPUT" | grep -oP 'Total tests: \K\d+')
+        PASSED_TESTS=$(echo "$OUTPUT" | grep -oP 'Passed: \K\d+')
 
-        echo "TEST_COUNT=$TEST_COUNT"
-        echo "TEST_COUNT=$TEST_COUNT" >> $GITHUB_ENV
+        # Format the result
+        TEST_RESULT="${TOTAL_TESTS}/${PASSED_TESTS}"
+
+        echo "TEST_RESULT=$TEST_RESULT"
+        echo "TEST_RESULT=$TEST_RESULT" >> $GITHUB_ENV
     
     - name: Update Gist with Test Results
       if: always()
@@ -56,7 +60,7 @@ jobs:
         gistID: 47477479896ebb9ad4156c5f274fb438
         filename: tests.json
         label: tests
-        message: ${{ env.TEST_COUNT }} passed
+        message: ${{ env.TEST_RESULT }} 
         color: success
 
     - name: Test Report
