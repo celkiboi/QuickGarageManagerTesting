@@ -35,15 +35,18 @@ jobs:
 
     - name: Install xmllint
       run: sudo apt-get install -y libxml2-utils
-
+    
     - name: Test and Extract Count
       id: test
       run: |
         OUTPUT=$(dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx")
         echo "$OUTPUT"
-        # Parse the .trx file and extract the number of tests passed using xmllint
-        TEST_COUNT=$(xmllint --xpath "string(//test-run/@total)" test-results.trx)
+        # Ensure the .trx file exists in the expected path
+        ls -l /home/runner/work/QuickGarageManagerTesting/QuickGarageManagerTesting/TestResults/
+        # Parse the .trx file and extract the number of tests passed using xmlstarlet
+        TEST_COUNT=$(xmlstarlet sel -t -v "//test-run/@total" /home/runner/work/QuickGarageManagerTesting/QuickGarageManagerTesting/TestResults/test-results.trx)
         echo "TEST_COUNT=$TEST_COUNT" >> $GITHUB_ENV
+    
     
     - name: Update Gist with Test Results
       if: always()
