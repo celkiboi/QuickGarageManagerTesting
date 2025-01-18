@@ -1,4 +1,8 @@
-# README
+# Quick Garage Manager Tests
+
+![Build Status](https://img.shields.io/github/actions/workflow/status/celkiboi/QuickGarageManagerTesting/dotnet.yml?branch=master&job=build)
+![Test Status](https://img.shields.io/github/actions/workflow/status/celkiboi/QuickGarageManagerTesting/dotnet.yml?branch=master&job=test)
+
 
 ## Automated Testing Framework for GitHub Pages Web Application
 
