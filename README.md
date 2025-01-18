@@ -1,8 +1,7 @@
 # Quick Garage Manager Tests
 
-![Build Status](https://img.shields.io/github/actions/workflow/status/celkiboi/QuickGarageManagerTesting/dotnet.yml?branch=master&job=build)
-![Test Status](https://img.shields.io/github/actions/workflow/status/celkiboi/QuickGarageManagerTesting/dotnet.yml?branch=master&job=test)
-
+![Build Status](https://img.shields.io/github/actions/workflow/status/celkiboi/QuickGarageManagerTesting/dotnet.yml?branch=master)
+![Tests](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/celkiboi/47477479896ebb9ad4156c5f274fb438/raw/tests.json)
 
 ## Automated Testing Framework for GitHub Pages Web Application
 
