@@ -22,7 +22,9 @@ jobs:
         dotnet-version: 9.0.x
     
     - name: Install Playwright CLI
-      run: dotnet tool install --global Microsoft.Playwright.CLI
+      run: |
+        dotnet tool install --global Microsoft.Playwright.CLI
+        export PATH="$PATH:$HOME/.dotnet/tools"
     - name: Install Playwright
       run: |
         dotnet add package Microsoft.Playwright --version 1.49.0
