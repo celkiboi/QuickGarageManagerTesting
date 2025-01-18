@@ -23,6 +23,8 @@ jobs:
     
     - name: Install Playwright CLI
       run: dotnet tool install --global Microsoft.Playwright.CLI
+    - name: Build
+      run: dotnet build --no-restore
     - name: Install Playwright
       run: |
         dotnet add package Microsoft.Playwright --version 1.49.0
