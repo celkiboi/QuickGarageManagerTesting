@@ -48,10 +48,9 @@ jobs:
 
         echo "TEST_RESULT=$TEST_RESULT"
         echo "TEST_RESULT=$TEST_RESULT" >> $GITHUB_ENV
-    
-    - name: Debug Gist API Response
-      run: |
-        curl -H "Authorization: token YOUR_GITHUB_TOKEN" https://api.github.com/user
+        
+    - name: check
+      run: ${{ secrets.GIST_SECRET }}
     
     - name: Update Gist with Test Results
       if: always()
