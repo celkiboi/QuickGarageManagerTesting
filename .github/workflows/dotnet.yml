@@ -48,20 +48,31 @@ jobs:
 
         echo "TEST_RESULT=$TEST_RESULT"
         echo "TEST_RESULT=$TEST_RESULT" >> $GITHUB_ENV
-
-    - name: check
-      run: echo ${{ secrets.GIST_SECRET }}
     
+    # - name: Update Gist with Test Results
+    #   if: always()
+    #   uses: schneegans/dynamic-badges-action@v1.6.0
+    #   with:
+    #     auth: ${{ secrets.GIST_SECRET }}
+    #     gistID: 47477479896ebb9ad4156c5f274fb438
+    #     filename: tests.json
+    #     label: tests
+    #     message: ${{ env.TEST_RESULT }} 
+    #     color: success
     - name: Update Gist with Test Results
-      if: always()
-      uses: schneegans/dynamic-badges-action@v1.6.0
-      with:
-        auth: ${{ secrets.GIST_SECRET }}
-        gistID: 47477479896ebb9ad4156c5f274fb438
-        filename: tests.json
-        label: tests
-        message: ${{ env.TEST_RESULT }} 
-        color: success
+      run: |
+        curl -X PATCH \
+          -H "Authorization: token ${{ secrets.GIST_SECRET }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "files": {
+              "tests.json": {
+                "content": "{\"schemaVersion\": 1, \"label\": \"tests\", \"message\": \"'"${{ env.TEST_RESULT }}"'\", \"color\": \"success\"}"
+              }
+            }
+          }' \
+          https://api.github.com/gists/47477479896ebb9ad4156c5f274fb438
+
 
     - name: Test Report
       uses: dorny/test-reporter@v1
