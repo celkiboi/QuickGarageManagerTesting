@@ -33,20 +33,27 @@ jobs:
         dotnet tool install --global Microsoft.Playwright.CLI
         playwright install
 
-    - name: Install xmllint
-      run: sudo apt-get install -y libxml2-utils
-    
-    - name: Test and Extract Count
+    - name: Install xmlstarlet
+      run: sudo apt-get install -y xmlstarlet
+
+    - name: Run tests and check .trx file
       id: test
       run: |
         OUTPUT=$(dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx")
         echo "$OUTPUT"
-        # Ensure the .trx file exists in the expected path
+        
+        # Ensure the .trx file exists in the expected directory
+        echo "Checking if test-results.trx exists in TestResults directory"
         ls -l /home/runner/work/QuickGarageManagerTesting/QuickGarageManagerTesting/TestResults/
+        
         # Parse the .trx file and extract the number of tests passed using xmlstarlet
         TEST_COUNT=$(xmlstarlet sel -t -v "//test-run/@total" /home/runner/work/QuickGarageManagerTesting/QuickGarageManagerTesting/TestResults/test-results.trx)
+        
+        # Output test count for debugging
+        echo "TEST_COUNT=$TEST_COUNT"
+        
+        # Store test count in GitHub environment
         echo "TEST_COUNT=$TEST_COUNT" >> $GITHUB_ENV
-    
     
     - name: Update Gist with Test Results
       if: always()
