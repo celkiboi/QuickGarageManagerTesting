@@ -38,7 +38,8 @@ jobs:
       run: |
         OUTPUT=$(dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx")
         echo "$OUTPUT"
-        TEST_COUNT=$(echo "$OUTPUT" | grep "Passed!" | grep -o '[0-9]\+ test' | grep -o '[0-9]\+')
+        # Parse the .trx file and extract the number of tests passed using xmllint
+        TEST_COUNT=$(xmllint --xpath "string(//test-run/@total)" test-results.trx)
         echo "TEST_COUNT=$TEST_COUNT" >> $GITHUB_ENV
     
     - name: Update Gist with Test Results
